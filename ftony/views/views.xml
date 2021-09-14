@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="ftony.list">
+      <field name="name">ftony list</field>
+      <field name="model">ftony.ftony</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="ftony.action_window">
+      <field name="name">ftony window</field>
+      <field name="res_model">ftony.ftony</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="ftony.action_server">
+      <field name="name">ftony server</field>
+      <field name="model_id" ref="model_ftony_ftony"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="ftony" id="ftony.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="ftony.menu_1" parent="ftony.menu_root"/>
+    <menuitem name="Menu 2" id="ftony.menu_2" parent="ftony.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="ftony.menu_1_list" parent="ftony.menu_1"
+              action="ftony.action_window"/>
+    <menuitem name="Server to list" id="ftony" parent="ftony.menu_2"
+              action="ftony.action_server"/>
+-->
+  </data>
+</odoo>
