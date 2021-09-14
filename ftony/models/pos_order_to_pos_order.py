@@ -7,7 +7,7 @@ from functools import partial
 import psycopg2
 import pytz
 
-from odoo import api, fields, models, tools,
+from odoo import api, fields, models, tools
 from odoo.tools import float_is_zero, float_round
 from odoo.exceptions import ValidationError, UserError
 from odoo.http import request
