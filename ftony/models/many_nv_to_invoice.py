@@ -16,28 +16,25 @@ import base64
 
 _logger = logging.getLogger(__name__)
 
-class PosOrdertoInvoice(models.Model):
-    _inherit = 'pos.order'
-    x_prueba = fields.Char('para pruebas')
-
-    def prueba(self):
-        for x in self:
-            x.x_prueba =  self
-
-    def action_many_pos_order_invoice(self,m):
-        diario = 0
-        cia = 0
-        ref = ''
-        crm_team_id = 0
-        list_lin = []
-        monto_partidas = 0
-    
+class NvPosInvoice(models.Model):
+    _inherit = 'account.move'
+           
+#este procedimiento es para agrupar varias notas de venta en una sola factura
+    def action_many_nv_one_invoice(self): 
+        
         if self.company_id.id in [1,2,3,]:
             diario = 52
             cia = 6
             crm_team_id = 1
             accountid = 269
             
+        invoice_vals = {}
+        ref = ''
+        refa = ''
+        m = 0
+        list_lin = []
+        monto_partidas = 0
+        # las facturas deben estar pagadas, de lo contario hay que quitar el filtro
         invoice_vals = {
                 'journal_id': diario, 
                 'move_type': 'out_invoice',
@@ -56,10 +53,10 @@ class PosOrdertoInvoice(models.Model):
                 'state': 'draft',
             }
         
-        lineas = self.env['pos.order.line'].search([('order_id', 'in', self.ids)]) \
+        lineas = self.env['account.move.line'].search([('move_id', 'in', self.ids)]) \
                     .filtered(lambda r: r.product_id.product_tmpl_id.x_clave_alterna)
         
-        for linea in lineas.sorted(key=lambda r: r.order_id.id):
+        for linea in lineas.sorted(key=lambda r: r.move_id.id):
             impuestos = []
         
             producto = self.env['product.product'].sudo().search([('default_code', '=', linea.product_id.product_tmpl_id.x_clave_alterna)])
@@ -76,14 +73,14 @@ class PosOrdertoInvoice(models.Model):
                 list_lin.clear()
             
             list_lin.append((0, 0,
-                             {'ref': linea.order_id.name,
+                             {'ref': linea.move_id.name,
                           'journal_id': diario, 
                           'company_id': cia,
                           'company_currency_id': self.company_id.currency_id.id,
                           'account_id': accountid, 
                           'account_root_id': accountid, 
                           'name': linea.name,
-                          'quantity': linea.qty,
+                          'quantity': linea.quantity,
                           'price_unit': linea.price_unit,
                           'product_uom_id': linea.product_uom_id.id,
                           'product_id': producto.id,
@@ -93,4 +90,4 @@ class PosOrdertoInvoice(models.Model):
 
         self.x_prueba = invoice_vals
         self.env['account.move'].sudo().create(invoice_vals)
-    
+        
