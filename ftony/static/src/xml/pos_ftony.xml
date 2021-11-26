@@ -59,13 +59,7 @@
                         </t>
                         <div >
                             <t t-esc="(line.quantity).toFixed(3)" />
-
-                            <t t-if="line.unit_name === 'Unidades'">
-                                Pz.
-                            </t>
-                            <t t-else="line.unit_name !== 'Unidades'">
-                                Kg.
-                            </t>
+                            <t t-esc="line.unit_name"/>
                             x
                             <span >
                                 <t t-esc="env.pos.format_currency(line.price_display_one)" />
@@ -125,13 +119,7 @@
                         </t>
                         <div >
                             <t t-esc="(line.quantity).toFixed(3)" />
-
-                            <t t-if="line.unit_name === 'Unidades'">
-                                Pz.
-                            </t>
-                            <t t-else="line.unit_name !== 'Unidades'">
-                                Kg.
-                            </t>
+                            <t t-esc="line.unit_name"/>
                             x
                             <span >
                                 <t t-esc="env.pos.format_currency(line.price_display_one)" />
@@ -158,7 +146,14 @@
         </xpath>
 </t>
 
-
+ <!--
+Se elimina el boton para seleccionar las listas de precio, esto evita que el usuario pueda cambiar y asignar, de esta forma
+las listas de precios se asignan desde el cliente.
+    -->
+<t t-name="SetPricelistButton" t-inherit="point_of_sale.SetPricelistButton"   t-inherit-mode="extension" owl="1">
+    <xpath expr="//div" position="replace">
+        </xpath>
+</t>     
 
 
 </templates>
