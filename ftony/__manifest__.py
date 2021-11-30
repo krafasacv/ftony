@@ -10,6 +10,7 @@
     'data': [
         'views/sequence_ff.xml',
         'views/pos_order_to_invoice.xml',
+        'views/ftony_assets.xml',
     ],
     'qweb': [
         'static/src/xml/pos_ftony.xml',
