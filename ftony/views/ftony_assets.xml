@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+    <template id="ftony_assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/ftony/static/src/js/models.js"/>
+        </xpath>
+    </template>
+  </data>
+</odoo>
