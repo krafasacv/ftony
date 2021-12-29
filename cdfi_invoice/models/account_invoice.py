@@ -15,7 +15,6 @@ from reportlab.lib.units import mm
 from . import amount_to_text_es_MX
 import pytz
 
-
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -82,7 +81,6 @@ class AccountMove(models.Model):
                    ('P01', _('Por definir')),],
         string=_('Uso CFDI (cliente)'),
     )
-    xml_invoice_link = fields.Char(string=_('XML Invoice Link'))
     estado_factura = fields.Selection(
         selection=[('factura_no_generada', 'Factura no generada'), ('factura_correcta', 'Factura correcta'), 
                    ('solicitud_cancelar', 'Cancelación en proceso'),('factura_cancelada', 'Factura cancelada'),
@@ -114,7 +112,8 @@ class AccountMove(models.Model):
                    ('607', _('Régimen de Enajenación o Adquisición de Bienes')),
                    ('629', _('De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales')),
                    ('630', _('Enajenación de acciones en bolsa de valores')),
-                   ('615', _('Régimen de los ingresos por obtención de premios')),],
+                   ('615', _('Régimen de los ingresos por obtención de premios')),
+                   ('625', _('Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas')),],
         string=_('Régimen Fiscal'), 
     )
     numero_cetificado = fields.Char(string=_('Numero de cetificado'))
@@ -274,7 +273,7 @@ class AccountMove(models.Model):
                 'invoice': {
                       'tipo_comprobante': self.tipo_comprobante,
                       'moneda': self.currency_id.name,
-                      'tipocambio': self.currency_id.rate,
+                      'tipocambio': self.currency_id.with_context(date=self.invoice_date).rate,
                       'forma_pago': self.forma_pago,
                       'methodo_pago': self.methodo_pago,
                       'subtotal': self.amount_untaxed,
@@ -482,9 +481,8 @@ class AccountMove(models.Model):
                                                  )
         self.qr_value = qr_value
         ret_val = createBarcodeDrawing('QR', value=qr_value, **options)
-        self.qrcode_image = base64.encodestring(ret_val.asString('jpg'))
-    
-    
+        self.qrcode_image = base64.encodebytes(ret_val.asString('jpg'))
+
     def print_cdfi_invoice(self):
         self.ensure_one()
         #return self.env['report'].get_action(self, 'custom_invoice.cdfi_invoice_report') #modulename.custom_report_coupon 
@@ -510,7 +508,7 @@ class AccountMove(models.Model):
                     raise UserError(_('Error para timbrar factura, Factura ya generada.'))
             if invoice.estado_factura == 'factura_cancelada':
                 raise UserError(_('Error para timbrar factura, Factura ya generada y cancelada.'))
-            
+
             values = invoice.to_json()
             if invoice.company_id.proveedor_timbrado == 'multifactura':
                 url = '%s' % ('http://facturacion.itadmin.com.mx/api/invoice')
@@ -523,6 +521,9 @@ class AccountMove(models.Model):
                     url = '%s' % ('https://itadmin.gecoerp.com/invoice/?handler=OdooHandler33')
                 else:
                     url = '%s' % ('https://itadmin.gecoerp.com/invoice/?handler=OdooHandler33')
+            else:
+                raise UserError(_('Error, falta seleccionar el servidor de timbrado en la configuración de la compañía.'))
+
             try:
                 response = requests.post(url , 
                                          auth=None,verify=False, data=json.dumps(values), 
@@ -555,7 +556,6 @@ class AccountMove(models.Model):
                                                 })
 
             invoice.write({'estado_factura': estado_factura,
-                           'xml_invoice_link': xml_file_link,
                            'factura_cfdi': True})
             invoice.message_post(body="CFDI emitido")
         return True
@@ -599,10 +599,12 @@ class AccountMove(models.Model):
                     url = '%s' % ('http://facturacion3.itadmin.com.mx/api/refund')
                 elif self.company_id.proveedor_timbrado == 'gecoerp':
                     if self.company_id.modo_prueba:
-                        #url = '%s' % ('https://ws.gecoerp.com/itadmin/pruebas/refund/?handler=OdooHandler33')
                         url = '%s' % ('https://itadmin.gecoerp.com/refund/?handler=OdooHandler33')
                     else:
                         url = '%s' % ('https://itadmin.gecoerp.com/refund/?handler=OdooHandler33')
+                else:
+                    raise UserError(_('Error, falta seleccionar el servidor de timbrado en la configuración de la compañía.'))
+
                 try:
                     response = requests.post(url , 
                                          auth=None,verify=False, data=json.dumps(values), 
@@ -714,7 +716,49 @@ class AccountMove(models.Model):
                 if invoice.estado_factura == 'solicitud_rechazada' or invoice.estado_factura == 'solicitud_cancelar':
                     invoice.estado_factura = 'factura_correcta'
                     # raise UserError(_('La factura ya fue cancelada, no puede volver a cancelarse.'))
- 
+
+    def liberar_cfdi(self):
+        for invoice in self:
+           values = {
+                 'command': 'liberar_cfdi',
+                 'rfc': invoice.company_id.vat,
+                 'folio': invoice.name.replace('INV','').replace('/',''),
+                 'serie_factura': invoice.journal_id.serie_diario or invoice.company_id.serie_factura,
+                 'archivo_cer': invoice.company_id.archivo_cer.decode("utf-8"),
+                 'archivo_key': invoice.company_id.archivo_key.decode("utf-8"),
+                 'contrasena': invoice.company_id.contrasena,
+                 }
+           url=''
+           if invoice.company_id.proveedor_timbrado == 'multifactura':
+               url = '%s' % ('http://facturacion.itadmin.com.mx/api/command')
+           elif invoice.company_id.proveedor_timbrado == 'multifactura2':
+               url = '%s' % ('http://facturacion2.itadmin.com.mx/api/command')
+           elif invoice.company_id.proveedor_timbrado == 'multifactura3':
+               url = '%s' % ('http://facturacion3.itadmin.com.mx/api/command')
+           if not url:
+               return
+           try:
+               response = requests.post(url,auth=None,verify=False, data=json.dumps(values),headers={"Content-type": "application/json"})
+               json_response = response.json()
+           except Exception as e:
+               print(e)
+               json_response = {}
+
+           if not json_response:
+               return
+           #_logger.info('something ... %s', response.text)
+
+           respuesta = json_response['respuesta']
+           message_id = self.env['mymodule.message.wizard'].create({'message': respuesta})
+           return {
+               'name': 'Respuesta',
+               'type': 'ir.actions.act_window',
+               'view_mode': 'form',
+               'res_model': 'mymodule.message.wizard',
+               'res_id': message_id.id,
+               'target': 'new'
+           }
+
 class MailTemplate(models.Model):
     "Templates for sending email"
     _inherit = 'mail.template'
@@ -737,17 +781,19 @@ class MailTemplate(models.Model):
                             ('res_id', '=', invoice.id),
                             ('res_model', '=', invoice._name),
                             ('name', '=', invoice.name.replace('/', '_') + '.xml')]
-                        xml_file = self.env['ir.attachment'].search(domain)[0]
+                        xml_file = self.env['ir.attachment'].search(domain, limit=1)
                         attachments = results[res_id]['attachments'] or []
-                        attachments.append(('CDFI_' + invoice.name.replace('/', '_') + '.xml', xml_file.datas))
+                        if xml_file:
+                           attachments.append(('CDFI_' + invoice.name.replace('/', '_') + '.xml', xml_file.datas))
                     else:
                         domain = [
                             ('res_id', '=', invoice.id),
                             ('res_model', '=', invoice._name),
                             ('name', '=', 'CANCEL_' + invoice.name.replace('/', '_') + '.xml')]
-                        xml_file = self.env['ir.attachment'].search(domain)[0]
-                        attachments = []	
-                        attachments.append(('CDFI_CANCEL_' + invoice.name.replace('/', '_') + '.xml', xml_file.datas))
+                        xml_file = self.env['ir.attachment'].search(domain, limit=1)
+                        attachments = []
+                        if xml_file:
+                           attachments.append(('CDFI_CANCEL_' + invoice.name.replace('/', '_') + '.xml', xml_file.datas))
                     results[res_id]['attachments'] = attachments
         return results
 
@@ -756,3 +802,13 @@ class AccountMoveLine(models.Model):
 
     pedimento = fields.Char('Pedimento')
     predial = fields.Char('No. Predial')
+
+class MyModuleMessageWizard(models.TransientModel):
+    _name = 'mymodule.message.wizard'
+    _description = "Show Message"
+
+    message = fields.Text('Message', required=True)
+
+#    @api.multi
+    def action_close(self):
+        return {'type': 'ir.actions.act_window_close'}

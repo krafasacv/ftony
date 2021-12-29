@@ -31,13 +31,12 @@ class AccountRegisterPayment(models.TransientModel):
                'type': 'ir.actions.act_window',
                'res_id': rec.id,
            }
-            
-            
+
     def _create_payment_vals_from_wizard(self):
         res = super(AccountRegisterPayment, self)._create_payment_vals_from_wizard()
         res.update({'fecha_pago': self.payment_date})
         return res
-    
+
 
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
@@ -64,10 +63,6 @@ class AccountPayment(models.Model):
                    ('30', '30 - Aplicación de anticipos'),
                    ('31', '31 - Intermediario pagos'), ],
                                 string=_('Forma de pago'), 
-                            )
-    tipo_comprobante = fields.Selection(
-                                selection=[ ('P', 'Pago'),],
-                                string=_('Tipo de comprobante'), default='P',
                             )
     methodo_pago = fields.Selection(
         selection=[('PUE', _('Pago en una sola exhibición')),
@@ -142,7 +137,7 @@ class AccountPayment(models.Model):
         try:
             data = json.loads(payment.docto_relacionados)
         except Exception:
-            data = []    
+            data = []
         return data
     
     
@@ -179,42 +174,30 @@ class AccountPayment(models.Model):
 
     
     def add_resitual_amounts(self):
-        _logger.info("entra aqui 4")
         if self.reconciled_invoice_ids and self.docto_relacionados != '[]':
             for invoice in self.reconciled_invoice_ids:
                 data = json.loads(self.docto_relacionados) or []
                 for line in data:
                     if invoice.folio_fiscal == line.get('iddocumento',False):
-                        #if self.currency_id.name != invoice.moneda:
-                        #   if invoice.moneda == 'MXN':
-                        #      monto_restante = round(invoice.residual/(1/self.currency_id.rate),2)
-                        #   else:
-                        #      monto_restante = round(invoice.residual*float(invoice.tipocambio),2)
-                        #else:
                         monto_restante = invoice.amount_residual
                         monto_pagar_docto = float(line.get('saldo_pendiente',False)) - monto_restante
-                        line['monto_pagar'] = monto_pagar_docto #float(line.get('saldo_pendiente',False)) - monto_restante
+                        line['monto_pagar'] = monto_pagar_docto
                         line['saldo_restante'] = monto_restante
                         self.write({'docto_relacionados': json.dumps(data)})
         elif self.reconciled_invoice_ids and self.docto_relacionados == '[]':
            # _logger.info('entra2 01')
            # if self.docto_relacionados == '[]': #si está vacio
-               _logger.info("entra aqui 5")
                docto_relacionados = []
                monto_pagado_asignar = round(self.monto_pagar,2)
                for invoice in self.reconciled_invoice_ids:
-                    _logger.info('entra2 02 %s', invoice.name)
                     if invoice.factura_cfdi:
                         #revisa la cantidad que se va a pagar en el docuemnto
                         if self.currency_id.name != invoice.moneda:
                             if self.currency_id.name == 'MXN':
-                            #   saldo_pendiente = round(invoice.residual*(1/res.currency_id.rate),2)
-                                tipocambiop = invoice.tipocambio #round(1/float(res.currency_id.rate),2) #
+                                tipocambiop = round(invoice.currency_id.with_context(date=self.date).rate,6) + 0.000001
                             else:
-                            #   saldo_pendiente = round(invoice.residual/float(invoice.tipocambio),2)
                                 tipocambiop = float(invoice.tipocambio)/float(self.currency_id.rate)
                         else:
-                            #saldo_pendiente = round(invoice.residual,2)
                             tipocambiop = invoice.tipocambio
 
                         payment_dict = json.loads(invoice.invoice_payments_widget)
@@ -243,26 +226,19 @@ class AccountPayment(models.Model):
     @api.model
     def create(self, vals):
         res = super(AccountPayment, self).create(vals)
-        _logger.info("entra aqui 3")
         if res.reconciled_invoice_ids:
-            _logger.info("entra aqui 2")
             docto_relacionados = []
             monto_pagado_asignar = round(res.monto_pagar,2)
             for invoice in res.reconciled_invoice_ids:
-                _logger.info("entra aqui")
                 if invoice.factura_cfdi:
                     #revisa la cantidad que se va a pagar en el docuemnto
                     if res.currency_id.name != invoice.moneda:
                         if res.currency_id.name == 'MXN':
-                        #   saldo_pendiente = round(invoice.residual*(1/res.currency_id.rate),2)
-                            tipocambiop = invoice.tipocambio #round(1/float(res.currency_id.rate),2) #
+                            tipocambiop = round(invoice.currency_id.with_context(date=res.date).rate,6) + 0.000001
                         else:
-                        #   saldo_pendiente = round(invoice.residual/float(invoice.tipocambio),2)
-                            tipocambiop = float(invoice.tipocambio)/float(res.currency_id.rate)
+                            tipocambiop = float(invoice.tipocambio)/float(res.currency_id.with_context(date=res.date).rate)
                     else:
-                        #saldo_pendiente = round(invoice.residual,2)
                         tipocambiop = invoice.tipocambio
-                    
                     nbr_payment = 0
                     pay_term_line_ids = invoice.line_ids.filtered(lambda line: line.account_id.user_type_id.type in ('receivable', 'payable'))
                     partials = pay_term_line_ids.mapped('matched_debit_ids') + pay_term_line_ids.mapped('matched_credit_ids')
@@ -342,7 +318,7 @@ class AccountPayment(models.Model):
         if self.currency_id.name == 'MXN':
             self.tipocambiop = '1'
         else:
-            self.tipocambiop = self.currency_id.rate
+            self.tipocambiop = self.currency_id.with_context(date=self.date).rate
 
         timezone = self._context.get('tz')
         if not timezone:
@@ -381,7 +357,7 @@ class AccountPayment(models.Model):
                       'uso_cfdi': 'P01',
                 },
                 'invoice': {
-                      'tipo_comprobante': self.tipo_comprobante,
+                      'tipo_comprobante': 'P',
                       'folio_complemento': self.name.replace('CUST.IN','').replace('/',''),
                       'serie_complemento': self.company_id.serie_complemento,
                       'fecha_factura': date_payment,
@@ -431,6 +407,10 @@ class AccountPayment(models.Model):
     
     def complete_payment(self):
         for p in self:
+            if p.folio_fiscal:
+                 p.write({'estado_pago': 'pago_correcto'})
+                 return True
+
             values = p.to_json()
             if self.company_id.proveedor_timbrado == 'multifactura':
                 url = '%s' % ('http://facturacion.itadmin.com.mx/api/payment')
@@ -559,7 +539,7 @@ class AccountPayment(models.Model):
                                                  )
         self.qr_value = qr_value
         ret_val = createBarcodeDrawing('QR', value=qr_value, **options)
-        self.qrcode_image = base64.encodestring(ret_val.asString('jpg'))
+        self.qrcode_image = base64.encodebytes(ret_val.asString('jpg'))
         self.folio_fiscal = TimbreFiscalDigital.attrib['UUID']
         
     
@@ -697,9 +677,10 @@ class MailTemplate(models.Model):
                         domain = [
                             ('res_id', '=', payment.id),
                             ('res_model', '=', payment._name),
-                            ('name', '=', payment.name.replace('/', '_') + '.xml')]
-                        xml_file = self.env['ir.attachment'].search(domain)[0]
-                        attachments.append((payment.name.replace('.','').replace('/', '_') + '.xml', xml_file.datas))
+                            ('name', '=', payment.name.replace('.','').replace('/', '_') + '.xml')]
+                        xml_file = self.env['ir.attachment'].search(domain, limit=1)
+                        if xml_file:
+                           attachments.append((payment.name.replace('.','').replace('/', '_') + '.xml', xml_file.datas))
                         results[res_id]['attachments'] = attachments
         return results
 
@@ -733,7 +714,8 @@ class AccountPaymentTerm(models.Model):
                    ('27', '27 - A satisfacción del acreedor'), 
                    ('28', '28 - Tarjeta de débito'), 
                    ('29', '29 - Tarjeta de servicios'), 
-                   ('30', '30 - Aplicación de anticipos'), 
+                   ('30', '30 - Aplicación de anticipos'),
+                   ('31', '31 - Intermediario pagos'),
                    ('99', '99 - Por definir'),],
         string=_('Forma de pago'),
     )
