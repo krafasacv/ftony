@@ -24,7 +24,7 @@
         
        <act_window id="action_invoice_carger"
             name="Cargar XML"
-            binding_model="account.move"
+            binding_model="account.invoice"
             res_model="import.account.payment.from.xml"
             binding_views="form" view_mode="form"
             target="new"

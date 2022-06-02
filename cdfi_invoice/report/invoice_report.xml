@@ -108,7 +108,7 @@
 							</div>
 								<t t-if="o.factura_cfdi">
 								<div>
-									<span t-field="o.company_id.vat" />
+									<span t-field="o.rfc_emisor" />
 								</div>
 								<div>
 									<strong>Regimen fiscal</strong>: <span t-field="o.company_id.regimen_fiscal" />
@@ -126,14 +126,7 @@
 								<t t-if="not o.factura_cfdi">
 									<strong>Nota de venta:</strong>
 								</t>
-								<strong>
-								     <t t-if="not o.journal_id.serie_diario">
-                                        <span t-if="o.company_id.serie_factura" t-field="o.company_id.serie_factura" />
-								     </t>
-								     <t t-if="o.journal_id.serie_diario">
-                                        <span t-field="o.journal_id.serie_diario" />
-								     </t>
-                                </strong>
+								<strong><span t-if="not o.serie_emisor=='false'" t-field="o.serie_emisor" /></strong>
 								<span t-field="o.number_folio" />
 							</div>
 							<div>
@@ -148,12 +141,7 @@
 							</div>
 							<div>
 								<strong>Lugar de expedición: </strong>
-								<t t-if="o.journal_id.codigo_postal">
-								    <span t-field="o.journal_id.codigo_postal"/>
-								</t>
-								<t t-if="not o.journal_id.codigo_postal">
-								    <span t-field="o.company_id.partner_id.zip"/>
-								</t>
+								<span t-field="o.company_id.partner_id.zip"/>
 							</div>
 							<div>
 								<t t-if="o.factura_cfdi">
@@ -173,9 +161,6 @@
 						    	 <div>
 								    <span t-field="o.partner_id.rfc" />
 								</div>
-								<div>
-						     		Regimen fiscal: <span t-field="o.partner_id.regimen_fiscal"/> C.P <span t-field="o.partner_id.zip"/>
-						 	 	</div>
 							     <div>
 						    	    Uso CFDI: <span t-field="o.uso_cfdi" />
 						         </div>
@@ -190,12 +175,6 @@
 					<t t-set="amount_untaxed" t-value="0.0"/>
 
 					<table class="table" font-size="16px;">
-						
-						<t t-if="o.company_id.modo_prueba == True">
-							<div style="position:absolute;opacity:0.2;z-index:99;width:100%;">
-            					<center><span style="font-size:150px;color:red;">FACTURA DE <br/>PRUEBA</span></center>
-            				</div>
-        				</t>
 						<thead>
 							<tr>
 								<th>Clave Producto</th>
@@ -359,11 +338,11 @@
 								<td >
 									<span t-field="o.methodo_pago" />
 								</td>
-					                        <td>
-									<strong>Fecha y hora de certificación</strong>
+								<td>
+									<strong>Régimen fiscal</strong>
 								</td>
 								<td >
-									<span t-field="o.fecha_certificacion" />
+									<span t-field="o.regimen_fiscal" />
 								</td>
 							</tr>
 							<tr>
@@ -406,6 +385,15 @@
 								</td>
 								<td >
 									<span t-field="o.folio_fiscal" />
+								</td>
+							</tr>
+							<tr>
+								<td></td><td></td>
+								<td>
+									<strong>Fecha y hora de certificación</strong>
+								</td>
+								<td >
+									<span t-field="o.fecha_certificacion" />
 								</td>
 							</tr>
 						</table>

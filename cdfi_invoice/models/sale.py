@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 #----------------------------------------------------------
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-
+      
     forma_pago = fields.Selection(
         selection=[('01', '01 - Efectivo'), 
                    ('02', '02 - Cheque nominativo'), 
@@ -61,18 +61,15 @@ class SaleOrder(models.Model):
                    ('D02', _('Gastos médicos por incapacidad o discapacidad')),
                    ('D03', _('Gastos funerales')),
                    ('D04', _('Donativos')),
-                   ('D05', _('Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación).')),
-                   ('D06', _('Aportaciones voluntarias al SAR.')),
                    ('D07', _('Primas por seguros de gastos médicos')),
                    ('D08', _('Gastos de transportación escolar obligatoria')),
-                   ('D09', _('Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones')),
                    ('D10', _('Pagos por servicios educativos (colegiaturas)')),
-                   ('S01', _('Sin efectos fiscales')),
-                   ('P01', _('Por definir (obsoleto)')),],
+                   ('P01', _('Por definir')),],
         string=_('Uso CFDI (cliente)'),
     )
     fecha_corregida = fields.Datetime(string=_('Fecha Cotizacion'), compute='_get_fecha_corregida')
 
+    
     @api.onchange('partner_id')
     def _get_uso_cfdi(self):
         if self.partner_id:
@@ -81,6 +78,7 @@ class SaleOrder(models.Model):
                 }
             self.update(values)
 
+    
     @api.onchange('payment_term_id')
     def _get_metodo_pago(self):
         if self.payment_term_id:

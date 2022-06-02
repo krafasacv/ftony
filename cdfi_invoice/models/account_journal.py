@@ -31,8 +31,7 @@ class AccountJournal(models.Model):
                    ('27', '27 - A satisfacción del acreedor'), 
                    ('28', '28 - Tarjeta de débito'), 
                    ('29', '29 - Tarjeta de servicios'), 
-                   ('30', '30 - Aplicación de anticipos'),
-                   ('31', '31 - Intermediario pagos'),],
+                   ('30', '30 - Aplicación de anticipos'),],
                                 string=_('Forma de pago'), 
                             )
 
