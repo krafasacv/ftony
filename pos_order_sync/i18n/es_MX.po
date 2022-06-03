@@ -1,0 +1,698 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_order_sync
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-23 20:56+0000\n"
+"PO-Revision-Date: 2021-03-23 16:13-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_MX\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "*Please select table."
+msgstr "* Por favor seleccione una tabla."
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid ""
+"<br/>\n"
+"\t\t\t\t\t\t\tDate:"
+msgstr ""
+"<br/>\n"
+"\t\t\t\t\t\t\tFecha:"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "<span>Quote # </span>"
+msgstr "<span> Cita n.º </span>"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "<strong>Taxes</strong>"
+msgstr "<strong> Impuestos </strong>"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: pos_order_sync
+#: model:ir.model.fields.selection,name:pos_order_sync.selection__pos_config__quotation_print_type__pdf
+msgid "Browser based (Pdf Report)"
+msgstr "Basado en navegador (informe en PDF)"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "CHANGE"
+msgstr "CAMBIO"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#: model:ir.model.fields.selection,name:pos_order_sync.selection__pos_quote__state__cancel
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+#, python-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__create_uid
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__create_date
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__partner_id
+#, python-format
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "Description"
+msgstr "Description"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__discount
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__notice
+msgid "Discount Notice"
+msgstr "Aviso de descuento"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Discount:"
+msgstr "Descuento:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Discounts"
+msgstr "Descuentos."
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_config__display_name
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_order__display_name
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__display_name
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: pos_order_sync
+#: model:ir.model.fields.selection,name:pos_order_sync.selection__pos_quote__state__done
+msgid "Done"
+msgstr "Hecho"
+
+#. module: pos_order_sync
+#: model:ir.model.fields.selection,name:pos_order_sync.selection__pos_quote__state__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Empty order!!!"
+msgstr "Pedido vacío !!!"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Extra Info"
+msgstr "Información extra"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Failed To Save Quotation"
+msgstr "No se pudo guardar la cotización"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Failed To Save Quotation."
+msgstr "No se pudo guardar la cotización."
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Failed To Send Quotation"
+msgstr "Error al enviar cotización"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Failed to show quotation history"
+msgstr "No se pudo mostrar el historial de cotizaciones"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__fiscal_position_id
+msgid "Fiscal Position"
+msgstr "Posición fiscal"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Floor :"
+msgstr "Suelo :"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Form session"
+msgstr "Formulario de sesión"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__session_id
+msgid "From POS Session"
+msgstr "Desde la sesión de POS"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "From POS:"
+msgstr "Desde POS:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "From session"
+msgstr "De la sesión"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_config__id
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_order__id
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__id
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__id
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__note
+msgid "Internal Notes"
+msgstr "Notas internas"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_config____last_update
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_order____last_update
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote____last_update
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__write_uid
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__write_date
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Leave it blank to auto-generate"
+msgstr "Déjelo en blanco para generar automáticamente"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__name
+msgid "Line"
+msgstr "Línea"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Logo"
+msgstr "Logo"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "No active session is available."
+msgstr "No hay ninguna sesión activa disponible."
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "None"
+msgstr "Ninguno"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Note For Internal Use"
+msgstr "Nota para uso interno"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Note:"
+msgstr "Nota:"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Notes"
+msgstr "Notas"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "OK"
+msgstr "OK"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Ok"
+msgstr "Ok"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Order Quotation"
+msgstr "Cotización de pedido"
+
+#. module: pos_order_sync
+#: model:ir.ui.menu,name:pos_order_sync.point_of_sale_order_quotes_menu
+msgid "Order Quotations"
+msgstr "Solicitar cotizaciones"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_order_sync_inherit_view_pos_config_form
+msgid "POS Order Sync"
+msgstr "POS Order Sync"
+
+#. module: pos_order_sync
+#: model:ir.model.fields.selection,name:pos_order_sync.selection__pos_config__quotation_print_type__posbox
+msgid "POSBOX (Xml Report)"
+msgstr "POSBOX (Xml Report)"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Please make sure you are connected to the network."
+msgstr "Asegúrate de estar conectado a la red."
+
+#. module: pos_order_sync
+#: model:ir.model,name:pos_order_sync.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del TPV"
+
+#. module: pos_order_sync
+#: model:ir.model,name:pos_order_sync.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Pedidos del TPV"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "Price"
+msgstr "Precio"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__pricelist_id
+msgid "Pricelist"
+msgstr "Lista de precios"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Products"
+msgstr "Productos"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__qty
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Quotation History"
+msgstr "Historial de cotizaciones"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_config__quotation_print_type
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_order_sync_inherit_view_pos_config_form
+msgid "Quotation Print Type"
+msgstr "Tipo de impresión de cotización"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Quotation is already loaded"
+msgstr "La cotización ya está cargada"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "Quotation is already loaded & in progress"
+msgstr "La cotización ya está cargada y en curso"
+
+#. module: pos_order_sync
+#: model:ir.actions.act_window,name:pos_order_sync.pos_order_quotes_form_view_action
+msgid "Quotations"
+msgstr "Cotizaciones"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__quote_id
+msgid "Quote"
+msgstr "Cita"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__date_order
+msgid "Quote Date"
+msgstr "Fecha de cotización"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Quote ID :"
+msgstr "ID de cotización:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Quote Id"
+msgstr "Id de cotización"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__quote_id
+msgid "Quote Identifier"
+msgstr "Identificador de cotización"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__lines
+msgid "Quote Lines"
+msgstr "Líneas de cotización"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quote_form_view
+msgid "Quote lines"
+msgstr "Líneas de cotización"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__quote_sent
+msgid "Quote sent"
+msgstr "Cotización enviada"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Quote:"
+msgstr "Cita:"
+
+#. module: pos_order_sync
+#: model:ir.actions.report,name:pos_order_sync.report_quote
+msgid "Receipt"
+msgstr "Recibo"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_order__quote_id
+msgid "Related Quote"
+msgstr "Cotización relacionada"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__pos_res_info
+msgid "Restaturant Info"
+msgstr "Información del restaurante"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__user_id
+msgid "Salesman"
+msgstr "Vendedor"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Search Orders"
+msgstr "Buscar ordenes"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_order_sync_inherit_view_pos_config_form
+msgid ""
+"Select between the option to print quotation as browser based Pdf Reprot or "
+"Xml Receipt(POSBOX)"
+msgstr ""
+"Seleccione entre la opción de imprimir la cotización como Pdf Reprot basado "
+"en el navegador o Recibo Xml (POSBOX)"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Send"
+msgstr "Enviar"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Send Order As Quotation"
+msgstr "Enviar pedido como cotización"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Send and Print"
+msgstr "Enviar e imprimir"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Served by"
+msgstr "Servido por"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__state
+#, python-format
+msgid "State"
+msgstr "Estado"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__price_subtotal_incl
+#, python-format
+msgid "Subtotal"
+msgstr "Total parcial"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__price_subtotal
+msgid "Subtotal w/o Tax"
+msgstr "Subtotal sin impuestos"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "TAX:"
+msgstr "IMPUESTO:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "TOTAL:"
+msgstr "TOTAL:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Table :"
+msgstr "Tabla"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__table_json
+msgid "Table JSON"
+msgstr "Tabla JSON"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__amount_tax
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__tax_ids
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Tel:"
+msgstr "Tel:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid ""
+"This quotation is already in progress. Please proceed with Order Reference "
+msgstr ""
+"Esta cotización ya está en curso. Continúe con la referencia de pedido"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid ""
+"This quotation is already loaded & in progress. Please proceed with Order "
+"Reference "
+msgstr ""
+"Esta cotización ya está cargada y en curso. Continúe con la referencia de "
+"pedido"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__to_session_id
+msgid "To POS Session"
+msgstr "A la sesión de POS"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "To POS session"
+msgstr "A la sesión POS"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "To POS:"
+msgstr "A POS:"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote__amount_total
+msgid "Total"
+msgstr "Total"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Total Amount"
+msgstr "Cantidad total"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "Total Taxes"
+msgstr "Impuestos totales"
+
+#. module: pos_order_sync
+#: model:ir.model.fields,field_description:pos_order_sync.field_pos_quote_line__price_unit
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "Unit Price"
+msgstr "Precio unitario"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "User"
+msgstr "Usuario"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.quote_order_report
+msgid "User:"
+msgstr "Usuario:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/xml/pos_order_sync.xml:0
+#, python-format
+msgid "VAT:"
+msgstr "VAT:"
+
+#. module: pos_order_sync
+#. openerp-web
+#: code:addons/pos_order_sync/static/src/js/main.js:0
+#, python-format
+msgid "You can't send an empty order, Please add some product(s) in cart."
+msgstr ""
+"No puede enviar un pedido vacío, agregue algunos productos en el carrito."
+
+#. module: pos_order_sync
+#: model:ir.model,name:pos_order_sync.model_pos_quote
+msgid "pos.quote"
+msgstr "pos.quote"
+
+#. module: pos_order_sync
+#: model:ir.model,name:pos_order_sync.model_pos_quote_line
+msgid "pos.quote.line"
+msgstr "pos.quote.line"
+
+#. module: pos_order_sync
+#: model_terms:ir.ui.view,arch_db:pos_order_sync.pos_quotes_tree_view
+msgid "tree session"
+msgstr "tree session"

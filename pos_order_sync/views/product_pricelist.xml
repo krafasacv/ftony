@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_product_pricelist_view_form_min_price_order_sync" model="ir.ui.view">
+		<field name="name">product.pricelist.form.inherit.min.price.order.sync</field>
+		<field name="model">product.pricelist</field>
+		<field name="inherit_id" ref="product.product_pricelist_view" />
+		<field name="arch" type="xml">
+            <xpath expr="//field[@name='item_ids']/tree/field[@name='fixed_price']" position="after">
+                <field name="product_min_price" />
+            </xpath>
+		</field>
+	</record>
+	<record id="view_product_pricelist_view_form_inherit_min_price" model="ir.ui.view">
+		<field name="name">product.pricelist.form.inherit.min.price</field>
+		<field name="model">product.pricelist</field>
+		<field name="inherit_id" ref="product.product_pricelist_view_inherit" />
+		<field name="arch" type="xml">
+            <xpath expr="//field[@name='item_ids']/tree/field[@name='price']" position="after">
+                <field name="product_min_price" />
+            </xpath>
+		</field>
+	</record>
+	
+	<record id="view_product_pricelist_item_view_form_inherit_min_price" model="ir.ui.view">
+		<field name="name">product.pricelist.item.form.inherit.min.price</field>
+		<field name="model">product.pricelist.item</field>
+		<field name="inherit_id" ref="product.product_pricelist_item_form_view" />
+		<field name="arch" type="xml">
+            <xpath expr="//field[@name='min_quantity']" position="after">
+                <field name="product_min_price" />
+            </xpath>
+		</field>
+	</record>
+</odoo>
